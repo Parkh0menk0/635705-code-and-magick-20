@@ -202,6 +202,26 @@
     function getWizardHeight() {
       return 1.337 * wizardWidth;
     }
+
+    /**
+     * Возвращает начальное положение мага по горизонтали;
+     *
+     * @param {number} gameFieldWidth Ширина игрового поля.
+     * @return {number} положение мага по горизонтали.
+     */
+    function getWizardX(gameFieldWidth) {
+      return (gameFieldWidth - wizardWidth) / 2;
+    }
+
+    /**
+     * Возвращает начальное положение мага по вертикали.
+     *
+     * @param {number} gameFieldHeight Высота игрового поля.
+     * @return {number} положение мага по вертикали.
+     */
+    function getWizardY(gameFieldHeight) {
+      return gameFieldHeight / 3;
+    }
   </script>
   <script src="js/game.js"></script>
 
