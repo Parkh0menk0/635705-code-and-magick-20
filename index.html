@@ -181,6 +181,16 @@
 
   <script>
     var fireballSize = 22; // размер фаербола в пикселях
+
+    /**
+     * Возвращает скорость фаербола в зависимости от направления ветра в игре.
+     *
+     * @param {number} isWindFromLeft индикатор ветра слева.
+     * @return {number} isWindFromLeft, скорость фаербола.
+     */
+    function getFireballSpeed(isWindFromLeft) {
+      return isWindFromLeft ? 5 : 2;
+    }
   </script>
   <script src="js/game.js"></script>
 
