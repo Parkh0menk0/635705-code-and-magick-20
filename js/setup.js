@@ -1,6 +1,7 @@
 'use strict';
 
 var setup = document.querySelector('.setup');
+var setupSimilar = document.querySelector('.setup-similar');
 
 var similarWizards = [];
 
@@ -74,6 +75,16 @@ function createWizards(generated) {
   return fragment;
 }
 
+/**
+ * @description Заполняет блок DOM-элементами на основе массива JS-объектов.
+ * @param {Object} fragment DocumentFragment.
+ */
+function fillWizards(fragment) {
+  var list = document.querySelector('.setup-similar-list');
+
+  list.appendChild(fragment);
+}
+
 setup.classList.remove('hidden');
 
 for (var i = 0; i < WIZARDS_COUNT; i++) {
@@ -84,3 +95,4 @@ for (var i = 0; i < WIZARDS_COUNT; i++) {
   });
 }
 
+fillWizards(createWizards(similarWizards));
