@@ -54,6 +54,26 @@ function randomInteger(max) {
   return Math.floor(Math.random() * (max + 1));
 }
 
+/**
+ * @description Создаёт DOM-элементы на основе JS-объекта.
+ * @param {Object[]} generated Сгенерированный массив персонажей.
+ * @return {Object} DocumentFragment.
+ */
+function createWizards(generated) {
+  var template = document.querySelector('#similar-wizard-template').content.querySelector('div');
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < generated.length; i++) {
+    var element = template.cloneNode(true);
+    element.querySelector('.setup-similar-label').textContent = generated[i].name;
+    element.querySelector('.wizard-coat').setAttribute('fill', generated[i].coatColor);
+    element.querySelector('.wizard-eyes').setAttribute('fill', generated[i].eyesColor);
+    fragment.appendChild(element);
+  }
+
+  return fragment;
+}
+
 setup.classList.remove('hidden');
 
 for (var i = 0; i < WIZARDS_COUNT; i++) {
