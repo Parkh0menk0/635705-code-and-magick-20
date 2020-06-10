@@ -96,3 +96,5 @@ for (var i = 0; i < WIZARDS_COUNT; i++) {
 }
 
 fillWizards(createWizards(similarWizards));
+
+setupSimilar.classList.remove('hidden');
