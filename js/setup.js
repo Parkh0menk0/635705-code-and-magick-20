@@ -1,6 +1,8 @@
 'use strict';
 
+var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
+var setupClose = setup.querySelector('.setup-close');
 var setupSimilar = document.querySelector('.setup-similar');
 
 var similarWizards = [];
@@ -85,7 +87,32 @@ function fillWizards(fragment) {
   list.appendChild(fragment);
 }
 
-setup.classList.remove('hidden');
+/**
+ * @description Открывает модальное окно.
+ */
+function openPopup() {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+}
+
+/**
+ * @description Закрывает модальное окно.
+ */
+function closePopup() {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+}
+
+/**
+ * @description Оработчик закрытия окна по нажатию на Esc.
+ * @param {Object} evt Объект события.
+ */
+function onPopupEscPress(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closePopup();
+  }
+}
 
 for (var i = 0; i < WIZARDS_COUNT; i++) {
   similarWizards.push({
@@ -98,3 +125,23 @@ for (var i = 0; i < WIZARDS_COUNT; i++) {
 fillWizards(createWizards(similarWizards));
 
 setupSimilar.classList.remove('hidden');
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    closePopup();
+  }
+});
