@@ -4,7 +4,7 @@ var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var setupSimilar = document.querySelector('.setup-similar');
-
+var userName = document.querySelector('.setup-user-name');
 var similarWizards = [];
 var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
 var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
@@ -122,7 +122,7 @@ function closePopup() {
  * @param {Object} evt Объект события.
  */
 function onPopupEscPress(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && !userName.matches(':focus')) {
     evt.preventDefault();
     closePopup();
   }
