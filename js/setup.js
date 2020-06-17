@@ -9,6 +9,9 @@ var similarWizards = [];
 var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
 var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
 var wizardFireball = document.querySelector('.setup-fireball-wrap');
+var coatColorHidden = document.querySelector('[name=coat-color]');
+var eyesColorHidden = document.querySelector('[name=eyes-color]');
+var fireballColorHidden = document.querySelector('[name=fireball-color]');
 
 var WIZARDS_COUNT = 4;
 
@@ -158,13 +161,19 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = EYES_COLOR[getRandomInteger(EYES_COLOR.length - 1)];
+  var color = EYES_COLOR[getRandomInteger(EYES_COLOR.length - 1)];
+  wizardEyes.style.fill = color;
+  eyesColorHidden.value = color;
 });
 
 wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = COAT_COLOR[getRandomInteger(COAT_COLOR.length - 1)];
+  var color = COAT_COLOR[getRandomInteger(COAT_COLOR.length - 1)];
+  wizardCoat.style.fill = color;
+  coatColorHidden.value = color;
 });
 
 wizardFireball.addEventListener('click', function () {
-  wizardFireball.style.backgroundColor = FIREBALL_COLOR[getRandomInteger(FIREBALL_COLOR.length - 1)];
+  var color = FIREBALL_COLOR[getRandomInteger(FIREBALL_COLOR.length - 1)];
+  wizardFireball.style.backgroundColor = color;
+  fireballColorHidden.value = color;
 });
