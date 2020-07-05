@@ -145,9 +145,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
-    openPopup();
-  }
+  window.util.isEnterEvent(evt, openPopup);
 });
 
 setupClose.addEventListener('click', function () {
@@ -155,9 +153,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
-    closePopup();
-  }
+  window.util.isEnterEvent(evt, closePopup);
 });
 
 wizardEyes.addEventListener('click', function () {
