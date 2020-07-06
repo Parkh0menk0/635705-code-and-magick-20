@@ -122,9 +122,9 @@ function closePopup() {
  * @param {Object} evt Объект события.
  */
 function onPopupEscPress(evt) {
-  if (evt.key === 'Escape' && !userName.matches(':focus')) {
+  if (!userName.matches(':focus')) {
     evt.preventDefault();
-    closePopup();
+    window.util.isEscEvent(evt, closePopup);
   }
 }
 

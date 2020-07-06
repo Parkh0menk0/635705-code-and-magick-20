@@ -3,7 +3,7 @@
 (function () {
   window.util = {
     isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.key === 'Escape') {
         action();
       }
     },
