@@ -111,20 +111,6 @@ fillWizards(createWizards(similarWizards));
 
 setupSimilar.classList.remove('hidden');
 
-wizardEyes.addEventListener('click', function () {
-  var color = EYES_COLOR[getRandomInteger(EYES_COLOR.length - 1)];
-  wizardEyes.style.fill = color;
-  eyesColorHidden.value = color;
-});
-
-wizardCoat.addEventListener('click', function () {
-  var color = COAT_COLOR[getRandomInteger(COAT_COLOR.length - 1)];
-  wizardCoat.style.fill = color;
-  coatColorHidden.value = color;
-});
-
-wizardFireball.addEventListener('click', function () {
-  var color = FIREBALL_COLOR[getRandomInteger(FIREBALL_COLOR.length - 1)];
-  wizardFireball.style.backgroundColor = color;
-  fireballColorHidden.value = color;
-});
+window.colorize(wizardEyes, eyesColorHidden, EYES_COLOR);
+window.colorize(wizardCoat, coatColorHidden, COAT_COLOR);
+window.colorize(wizardFireball, fireballColorHidden, FIREBALL_COLOR);
