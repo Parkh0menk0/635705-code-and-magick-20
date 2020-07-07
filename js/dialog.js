@@ -2,8 +2,10 @@
 
 (function () {
 
+  var setup = document.querySelector('.setup');
   var setupClose = setup.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
+  var userName = document.querySelector('.setup-user-name');
 
   /**
    * @description Открывает модальное окно.
