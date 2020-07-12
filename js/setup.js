@@ -36,7 +36,11 @@
     return wizardElement;
   }
 
-  window.backend.load(function (wizards) {
+  /**
+   * @description Обработчик успешной загрузки.
+   * @param {Object[]} wizards Массив объектов персонажей.
+   */
+  var successHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < WIZARDS_COUNT; i++) {
@@ -45,16 +49,39 @@
     similarListElement.appendChild(fragment);
 
     setupSimilar.classList.remove('hidden');
-  }, function () {});
+  };
 
-  form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function (response) {
+  /**
+   * @description Обработчик успешной загрузки.
+   * @param {Object} evt Событие DOM.
+   */
+  var submitHandler = function (evt) {
+    window.backend.save(new FormData(form), function () {
       window.dialog.setup.classList.add('hidden');
     });
     evt.preventDefault();
-  });
+  };
+
+  /**
+   * @description Обработчик ошибки.
+   * @param {String} errorMessage Текстовое описание ошибки.
+   */
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
 
   window.colorize(wizardEyes, eyesColorHidden, color.eyes);
   window.colorize(wizardCoat, coatColorHidden, color.coat);
   window.colorize(wizardFireball, fireballColorHidden, color.fireball);
+
+  window.backend.load(successHandler, errorHandler);
+  form.addEventListener('submit', submitHandler);
 })();
