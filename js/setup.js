@@ -2,6 +2,7 @@
 
 (function () {
 
+  var form = document.querySelector('.setup-wizard-form');
   var similarListElement = document.querySelector('.setup-similar-list');
   var template = document.querySelector('#similar-wizard-template').content;
   var setupSimilar = document.querySelector('.setup-similar');
@@ -46,6 +47,12 @@
     setupSimilar.classList.remove('hidden');
   }, function () {});
 
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), function (response) {
+      window.dialog.setup.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
 
   window.colorize(wizardEyes, eyesColorHidden, color.eyes);
   window.colorize(wizardCoat, coatColorHidden, color.coat);
