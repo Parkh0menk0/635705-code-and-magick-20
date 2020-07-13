@@ -17,11 +17,12 @@
   var TIMEOUT_IN_MS = 10000;
 
   /**
-   * @description Получает с сервера данные с помощью объекта XMLHttpRequest, обрабатывает полученные запросы и передаёт полученную информацию в функцию обратного вызова.
-   * @param {callback} onLoad Функция обратного вызова, которая срабатывает при успешном выполнении запроса.
-   * @param {callback} onError Функция обратного вызова, которая срабатывает при неуспешном выполнении запроса.
+   * @description Cоздаёт объект XMLHttpReques.
+   * @param {requestCallback} onLoad Функция обратного вызова, которая срабатывает при успешном выполнении запроса.
+   * @param {requestCallback} onError Функция обратного вызова, которая срабатывает при неуспешном выполнении запроса.
+   * @return {Object} объект XMLHttpRequest.
    */
-  var load = function (onLoad, onError) {
+  var createXHR = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -59,6 +60,16 @@
 
     xhr.timeout = TIMEOUT_IN_MS;
 
+    return xhr;
+  };
+
+  /**
+   * @description Получает с сервера данные с помощью объекта XMLHttpRequest, обрабатывает полученные запросы и передаёт полученную информацию в функцию обратного вызова.
+   * @param {requestCallback} onLoad Функция обратного вызова, которая срабатывает при успешном выполнении запроса.
+   * @param {requestCallback} onError Функция обратного вызова, которая срабатывает при неуспешном выполнении запроса.
+   */
+  var load = function (onLoad, onError) {
+    var xhr = createXHR(onLoad, onError);
     xhr.open('GET', URL.load);
     xhr.send();
   };
@@ -66,37 +77,11 @@
   /**
    * @description Отправляет данные игрока на сервер, обрабатывает ошибки и скрывает форму редактирования персонажа, если ошибок не произошло.
    * @param {Object} data Объект FormData, который содержит данные формы, которые будут отправлены на сервер.
-   * @param {callback} onLoad Функция обратного вызова, которая срабатывает при успешном выполнении запроса.
-   * @param {callback} onError Функция обратного вызова, которая срабатывает при неуспешном выполнении запроса.
+   * @param {requestCallback} onLoad Функция обратного вызова, которая срабатывает при успешном выполнении запроса.
+   * @param {requestCallback} onError Функция обратного вызова, которая срабатывает при неуспешном выполнении запроса.
    */
   var save = function (data, onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      var error;
-      switch (xhr.status) {
-        case statusCode.OK:
-          onLoad(xhr.response);
-          break;
-        case statusCode.BadRequest:
-          error = 'Неверный запрос';
-          break;
-        case statusCode.Unauthorized:
-          error = 'Пользователь не авторизован';
-          break;
-        case statusCode.NotFound:
-          error = 'Ничего не найдено';
-          break;
-        default:
-          error = 'Cтатус ответа: : ' + xhr.status + ' ' + xhr.statusText;
-      }
-
-      if (error) {
-        onError(error);
-      }
-    });
-
+    var xhr = createXHR(onLoad, onError);
     xhr.open('POST', URL.send);
     xhr.send(data);
   };
