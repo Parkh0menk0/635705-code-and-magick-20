@@ -2,11 +2,6 @@
 
 (function () {
 
-  // var INITIAL_COORDS = {
-  //   x: 44,
-  //   y: 80
-  // };
-
   var setup = document.querySelector('.setup');
   var setupClose = setup.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
@@ -114,5 +109,9 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.dialog = {
+    setup: setup
+  };
 
 })();
